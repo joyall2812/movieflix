@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Add Review{% endblock %}
+
+{% block content %}
+<!-- Add Review Section -->
+<section id="add-review" class="add-review section">
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="section-title text-center">
+          <h2>Add Review</h2>
+          <p>Share your thoughts about the movie.</p>
+        </div>
+        <form method="post" action="{% url 'add_review' movie.id %}" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="title">Review Title</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+          </div>
+          <div class="form-group">
+            <label for="content">Review Content</label>
+            <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="rating">Rating</label>
+            <select class="form-control" id="rating" name="rating" required>
+              <option value="1">1 - Poor</option>
+              <option value="2">2 - Fair</option>
+              <option value="3">3 - Good</option>
+              <option value="4">4 - Very Good</option>
+              <option value="5">5 - Excellent</option>
+            </select>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Submit Review</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

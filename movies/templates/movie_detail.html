@@ -1,0 +1,58 @@
+<!-- movies/templates/movie_detail.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ movie.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+
+      <!-- Movie Title and Poster -->
+      <section class="movie-header text-center">
+        <h2>{{ movie.title }}</h2>
+        <img src="{{ movie.poster.url }}" class="img-fluid mb-3" alt="{{ movie.title }}">
+      </section>
+
+      <hr>
+
+      <!-- Movie Description -->
+      <section class="movie-description mb-4">
+        <h3>Description</h3>
+        <p>{{ movie.description }}</p>
+        <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
+      </section>
+
+      <hr>
+
+      <!-- Reviews Section -->
+      <section class="movie-reviews mb-4">
+        <h3>Reviews</h3>
+        {% for review in reviews %}
+          <div class="review mb-3">
+            <h4>{{ review.title }}</h4>
+            <p>{{ review.comment }}</p>
+            <p><strong>Rating:</strong> {{ review.rating }}</p>
+          </div>
+        {% empty %}
+          <p>No reviews yet.</p>
+        {% endfor %}
+        <a href="{% url 'add_review' movie.id %}" class="btn btn-primary mt-3">Add Review</a>
+      </section>
+
+      <hr>
+
+      <!-- Trailer Section -->
+      {% if movie.youtube_trailer %}
+        <section class="movie-trailer text-center mb-4">
+          <a href="{{ movie.youtube_trailer }}" target="_blank" class="btn btn-secondary">
+            <i class="fab fa-youtube"></i> Watch Trailer
+          </a>
+        </section>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+{% endblock %}

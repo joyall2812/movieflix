@@ -1,0 +1,40 @@
+<!-- templates/index.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section id="hero" class="hero section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 text-center" data-aos="fade-up" data-aos-delay="100">
+        <h2>Welcome to <span>MovieFlix</span></h2>
+        <p>Your go-to place for discovering and sharing the latest movies.</p>
+        <a href="#movies" class="btn-get-started mb-3">Browse Movies</a>
+        {% include 'search_form.html' %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Movies Section -->
+<section id="movies" class="movies section">
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row gy-4 justify-content-center">
+      {% for movie in movies %}
+      <div class="col-xl-3 col-lg-4 col-md-6">
+        <div class="movie-item h-100" style="position: relative;">
+          <a href="{% url 'movie_detail' movie.id %}">
+            <img src="{{ movie.poster.url }}" class="img-fluid" alt="{{ movie.title }}" style="max-height: 300px; width: 100%; object-fit: cover;">
+            <h3 class="movie-title">{{ movie.title }}</h3>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

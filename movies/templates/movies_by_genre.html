@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Movies by Genre{% endblock %}
+
+{% block content %}
+<!-- Genre Movies Section -->
+<section id="genre-movies" class="genre-movies section">
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="section-title text-center">
+      <h2>Movies in {{ genre.name }}</h2>
+    </div>
+    <div class="row gy-4 justify-content-center">
+      {% for movie in movies %}
+      <div class="col-xl-3 col-lg-4 col-md-6">
+        <div class="movie-item h-100">
+          <img src="{{ movie.poster.url }}" class="img-fluid" alt="{{ movie.title }}">
+          <div class="movie-links d-flex align-items-center justify-content-center">
+            <a href="{{ movie.poster.url }}" title="{{ movie.title }}" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+            <a href="{% url 'movie_detail' movie.id %}" class="details-link"><i class="bi bi-link-45deg"></i></a>
+          </div>
+          <h3>{{ movie.title }}</h3>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
+
